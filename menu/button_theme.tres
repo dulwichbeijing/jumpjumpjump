@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://u8ayyf6o51bg"]
+
+[ext_resource type="StyleBox" uid="uid://cki5hqs4inv3e" path="res://menu/button_focus.tres" id="1_3asxv"]
+[ext_resource type="StyleBox" uid="uid://bakno7midyw1l" path="res://menu/button_standard.tres" id="2_eatb2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6y74a"]
+
+[resource]
+Button/styles/focus = ExtResource("1_3asxv")
+Button/styles/normal = ExtResource("2_eatb2")
+Button/styles/pressed = SubResource("StyleBoxFlat_6y74a")

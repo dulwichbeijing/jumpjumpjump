@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://d0v1hbf85jgfs"]
+
+[ext_resource type="FontFile" uid="uid://bchxk26lacpcy" path="res://assets/snack_omeal/Snack Omeal.ttf" id="1_8jiqw"]
+
+[resource]
+default_font = ExtResource("1_8jiqw")
+Label/font_sizes/font_size = 20

@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfblwql35f3rk"]
+
+[ext_resource type="PackedScene" uid="uid://wfk1vl2to1uu" path="res://game/player/player.tscn" id="1_2f80r"]
+[ext_resource type="Script" path="res://game/level.gd" id="1_6cpmv"]
+[ext_resource type="PackedScene" uid="uid://c2rtcfsbtol0u" path="res://game/objects/platform/platform.tscn" id="2_dgwhu"]
+[ext_resource type="PackedScene" uid="uid://brttnhba51kpi" path="res://game/name_entry.tscn" id="2_i48fn"]
+[ext_resource type="FontFile" uid="uid://bchxk26lacpcy" path="res://assets/snack_omeal/Snack Omeal.ttf" id="5_1nwqw"]
+[ext_resource type="AudioStream" uid="uid://hmwpsswxk50e" path="res://assets/audio/game_over.wav" id="5_hu4eq"]
+
+[node name="Game" type="Node"]
+metadata/_edit_horizontal_guides_ = [25.0]
+metadata/_edit_vertical_guides_ = [25.0]
+
+[node name="UserInterface" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UserInterface"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UserInterface"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface"]
+offset_left = 71.0
+offset_top = 22.0
+offset_right = 322.0
+offset_bottom = 77.0
+
+[node name="ScoreLabel" type="Label" parent="UserInterface/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_1nwqw")
+theme_override_font_sizes/font_size = 40
+text = "Score: "
+
+[node name="ScoreValue" type="Label" parent="UserInterface/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_1nwqw")
+theme_override_font_sizes/font_size = 40
+text = "0"
+
+[node name="NameEntry" parent="UserInterface" instance=ExtResource("2_i48fn")]
+unique_name_in_owner = true
+visible = false
+
+[node name="GameObjects" type="CanvasLayer" parent="."]
+
+[node name="Level" type="Node2D" parent="GameObjects"]
+script = ExtResource("1_6cpmv")
+platform = ExtResource("2_dgwhu")
+
+[node name="Platforms" type="Node2D" parent="GameObjects/Level"]
+unique_name_in_owner = true
+
+[node name="Player" parent="GameObjects/Level" instance=ExtResource("1_2f80r")]
+unique_name_in_owner = true
+position = Vector2(571, 558)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameObjects/Level"]
+stream = ExtResource("5_hu4eq")
+
+[node name="Timer" type="Timer" parent="GameObjects/Level"]
+unique_name_in_owner = true
+wait_time = 3.0
+
+[connection signal="timeout" from="GameObjects/Level/Timer" to="GameObjects/Level" method="_on_timer_timeout"]
