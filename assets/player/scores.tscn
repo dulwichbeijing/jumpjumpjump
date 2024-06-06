@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddwymo2dod2ms"]
+
+[ext_resource type="Script" path="res://menu/scores/scores.gd" id="1_7rue7"]
+[ext_resource type="FontFile" path="res://assets/snack_omeal/Snack Omeal.ttf" id="2_6st7r"]
+[ext_resource type="Theme" path="res://menu/scores/score_board.tres" id="3_q16ed"]
+[ext_resource type="Theme" path="res://menu/button_theme.tres" id="4_fhm6w"]
+
+[node name="Scores" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7rue7")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -253.0
+offset_top = -81.0
+offset_right = 254.0
+offset_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="GameTitle" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6st7r")
+theme_override_font_sizes/font_size = 60
+text = "DCB top jumpers"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ScoresContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("3_q16ed")
+theme_override_constants/separation = 10
+
+[node name="MenuButton" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("4_fhm6w")
+text = "Return to menu"
+
+[connection signal="pressed" from="VBoxContainer/MarginContainer/VBoxContainer/MenuButton" to="." method="_on_menu_pressed"]

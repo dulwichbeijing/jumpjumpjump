@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://cs1ml2dr4s787"]
+
+[ext_resource type="FontFile" path="res://assets/snack_omeal/Snack Omeal.ttf" id="1_5q3mr"]
+[ext_resource type="PackedScene" path="res://game/name_entry.tscn" id="2_p5tdp"]
+[ext_resource type="Script" path="res://game/level.gd" id="3_vh5ay"]
+[ext_resource type="PackedScene" path="res://game/objects/platform/platform.tscn" id="4_vvwtv"]
+[ext_resource type="PackedScene" path="res://game/player/player.tscn" id="5_y4hrk"]
+[ext_resource type="AudioStream" path="res://assets/audio/game_over.wav" id="6_eadju"]
+
+[node name="Game" type="Node"]
+metadata/_edit_horizontal_guides_ = [25.0]
+metadata/_edit_vertical_guides_ = [25.0]
+
+[node name="UserInterface" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UserInterface"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UserInterface"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UserInterface"]
+offset_left = 71.0
+offset_top = 22.0
+offset_right = 322.0
+offset_bottom = 77.0
+
+[node name="ScoreLabel" type="Label" parent="UserInterface/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_5q3mr")
+theme_override_font_sizes/font_size = 40
+text = "Score: "
+
+[node name="ScoreValue" type="Label" parent="UserInterface/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_5q3mr")
+theme_override_font_sizes/font_size = 40
+text = "0"
+
+[node name="NameEntry" parent="UserInterface" instance=ExtResource("2_p5tdp")]
+unique_name_in_owner = true
+visible = false
+
+[node name="GameObjects" type="CanvasLayer" parent="."]
+
+[node name="Level" type="Node2D" parent="GameObjects"]
+script = ExtResource("3_vh5ay")
+platform = ExtResource("4_vvwtv")
+
+[node name="Platforms" type="Node2D" parent="GameObjects/Level"]
+unique_name_in_owner = true
+
+[node name="Player" parent="GameObjects/Level" instance=ExtResource("5_y4hrk")]
+unique_name_in_owner = true
+position = Vector2(571, 558)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="GameObjects/Level"]
+stream = ExtResource("6_eadju")
+
+[node name="Timer" type="Timer" parent="GameObjects/Level"]
+unique_name_in_owner = true
+wait_time = 3.0
+
+[connection signal="timeout" from="GameObjects/Level/Timer" to="GameObjects/Level" method="_on_timer_timeout"]
